@@ -5,21 +5,11 @@ type Props = { stats: LengthStats; total: number };
 const Part = ({
   props,
   status,
-  left,
-  right,
 }: {
   props: Props;
   status: TronçonStatus;
-  left?: boolean;
-  right?: boolean;
 }) => {
   let className = "progress-bar-part";
-  if (left) {
-    className += " progress-bar-part-left";
-  }
-  if (right) {
-    className += " progress-bar-part-right";
-  }
   const width = (100 * props.stats[status]) / props.total;
   return (
     <div
@@ -43,12 +33,14 @@ export default function ProgressBar(props: Props) {
   return (
     <>
       <div className="progress-bar">
-        <Part props={props} status={TronçonStatus.PreExisting} left />
-        <Part props={props} status={TronçonStatus.Built} />
-        <Part props={props} status={TronçonStatus.Building} />
-        <Part props={props} status={TronçonStatus.Planned} />
-        <Part props={props} status={TronçonStatus.Blocked} />
-        <Part props={props} status={TronçonStatus.Unknown} right />
+        <div className="progress-bar--parts">
+          <Part props={props} status={TronçonStatus.PreExisting} />
+          <Part props={props} status={TronçonStatus.Built} />
+          <Part props={props} status={TronçonStatus.Building} />
+          <Part props={props} status={TronçonStatus.Planned} />
+          <Part props={props} status={TronçonStatus.Blocked} />
+          <Part props={props} status={TronçonStatus.Unknown} />
+        </div>
       </div>
       <div className="progress-bar--pointer">
         <div

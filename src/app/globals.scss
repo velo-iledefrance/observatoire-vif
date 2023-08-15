@@ -281,9 +281,13 @@
   height: 46px;
   border-radius: 29px;
   border: solid 6px #eaeae5;
-  box-sizing: content-box;
+  box-sizing: content-box;  
+}
+
+.progress-bar--parts {
   display: flex;
   flex-direction: row;
+  clip-path: inset(0% 0% round 29px);
 }
 
 @media screen and (max-width: $desktop) {
@@ -298,14 +302,6 @@
   flex-grow: 1;
   margin: 0;
   height: 46px;
-}
-
-.progress-bar-part-left {
-  border-radius: 23px 0 0 23px;
-}
-
-.progress-bar-part-right {
-  border-radius: 0 23px 23px 0;
 }
 
 .progress-bar--pointer {
