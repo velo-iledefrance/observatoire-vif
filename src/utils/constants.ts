@@ -1,12 +1,22 @@
 import { TronçonStatus, TypeMOA } from "@/app/types";
 
 export const statusLabel = {
-  [TronçonStatus.PreExisting]: "Pré-existant au 01/01/2022",
+  [TronçonStatus.PreExisting]: "Préexistant au 01/01/2022",
   [TronçonStatus.Built]: "Livré",
   [TronçonStatus.Building]: "En travaux",
   [TronçonStatus.Planned]: "En cours de discussion",
   [TronçonStatus.Blocked]: "Au point mort",
   [TronçonStatus.SecondPhase]: "Phase 2 (2030)",
+  [TronçonStatus.Unknown]: "Inconnu",
+};
+
+export const shortStatusLabel = {
+  [TronçonStatus.PreExisting]: "Préexistant",
+  [TronçonStatus.Built]: "Livré",
+  [TronçonStatus.Building]: "En travaux",
+  [TronçonStatus.Planned]: "En discussion",
+  [TronçonStatus.Blocked]: "Au point mort",
+  [TronçonStatus.SecondPhase]: "Phase 2",
   [TronçonStatus.Unknown]: "Inconnu",
 };
 
@@ -28,16 +38,6 @@ export const fadedStatusColor = {
   [TronçonStatus.Blocked]: "#ea8696",
   [TronçonStatus.SecondPhase]: "#FFF",
   [TronçonStatus.Unknown]: "#b3b3b3",
-};
-
-export const globalBarColor = {
-  [TronçonStatus.PreExisting]: statusColor[TronçonStatus.PreExisting],
-  [TronçonStatus.Built]: statusColor[TronçonStatus.Built],
-  [TronçonStatus.Building]: statusColor[TronçonStatus.Building],
-  [TronçonStatus.Planned]: statusColor[TronçonStatus.Unknown],
-  [TronçonStatus.Blocked]: statusColor[TronçonStatus.Unknown],
-  [TronçonStatus.SecondPhase]: "#FFF",
-  [TronçonStatus.Unknown]: statusColor[TronçonStatus.Unknown],
 };
 
 export const moaLabel = {

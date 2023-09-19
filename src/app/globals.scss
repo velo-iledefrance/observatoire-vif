@@ -313,12 +313,26 @@
   border-radius: 29px;
   border: solid 6px #eaeae5;
   box-sizing: content-box;
+  position: relative;
+  margin-block-end: 62px;
 }
 
-.progress-bar--parts {
+.progress-bar__parts {
   display: flex;
   flex-direction: row;
+  height: 46px;
   clip-path: inset(0% 0% round 29px);
+}
+
+.progress-bar__parts-hover {
+  // Invisible div that recreates the .progress-bar__parts, without the clip-path, for :hover in children
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 @media screen and (max-width: $desktop) {
@@ -329,34 +343,63 @@
   }
 }
 
-.progress-bar-part {
-  flex-grow: 1;
-  margin: 0;
-  height: 46px;
+.progress-bar__part {
+  position: relative;
 }
 
-.progress-bar--pointer {
-  margin-inline: 6px;
-  margin-block-end: 8px;
+.progress-bar__part .progress-bar__pointer {
+  display: none;
 }
 
-.progress-bar--arrow {
+.progress-bar__part:hover .progress-bar__pointer {
+  position: absolute;
+  display: block;
+  top: calc(100%);
+  left: 50%;
+}
+
+.progress-bar__parts-hover:hover ~ .progress-bar__pointer {
+  display: none;
+}
+
+.progress-bar__pointer {
+  margin-block-start: 14px;
+}
+
+.progress-bar__arrow {
   width: 17px;
   height: 8px;
-  margin-top: 8px;
   background: black;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   transform: translateX(-50%);
 }
 
-.progress-bar--percent {
-  width: 69px;
-  height: 32px;
-  line-height: 32px;
-  background: black;
+.progress-bar__arrow--gray {
+  background: #eaeae5;
+}
+
+.progress-bar__bubble {
+  width: max-content;
+  padding-inline: 12px;
   border-radius: 16px;
-  color: white;
   transform: translateX(-50%);
+}
+
+.progress-bar__bubble--black {
+  line-height: 32px;
+  color: white;
+  background: black;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.progress-bar__bubble--gray {
+  padding-block: 4px;
+  color: black;
+  background: #eaeae5;
+  text-align: left;
+  font-size: 1rem;
 }
 
 // Maplibre overrides
