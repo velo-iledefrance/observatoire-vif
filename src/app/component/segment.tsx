@@ -1,5 +1,21 @@
-import { statusColor, statusLabel, moaLabel } from "@/utils/constants";
+import { statusColor, statusLabel, moaLabel, moaName } from "@/utils/constants";
 import { TronçonProperties } from "../types";
+
+function moa(segment: TronçonProperties) {
+  if (segment.moa) {
+    const moa = moaName[segment.moa] || segment.moa;
+    return (
+      <div className="vif--block">
+        <label className="has-text-weight-normal has-text-grey">
+          Collectivité en charge de l’aménagement
+        </label>
+        <p className="is-size-5 has-text-weight-semibold">{moa}</p>
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
 
 function blockingCommune(segment: TronçonProperties) {
   if (segment.blockingCommune) {
@@ -59,14 +75,7 @@ export default function ({
           ></div>
         </div>
 
-        <div className="vif--block">
-          <label className="has-text-weight-normal has-text-grey">
-            Collectivité en charge de l’aménagement
-          </label>
-          <p className="is-size-5 has-text-weight-semibold">
-            {moaLabel[segment.typeMOA]} {segment.moa}
-          </p>
-        </div>
+        {moa(segment)}
         {blockingCommune(segment)}
       </div>
     </>
