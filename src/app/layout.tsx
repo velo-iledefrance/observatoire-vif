@@ -20,6 +20,9 @@ export default async function RootLayout() {
           href="https://unpkg.com/maplibre-gl@3.0.0/dist/maplibre-gl.css"
           rel="stylesheet"
         />
+        <link rel="icon" href="/cropped-favicon_cvidf_rvb-32x32.png" sizes="32x32" />
+        <link rel="icon" href="/cropped-favicon_cvidf_rvb-192x192.png" sizes="192x192" />
+        <link rel="apple-touch-icon" href="/cropped-favicon_cvidf_rvb-180x180.png" />
       </head>
       <body className={inter.className}>
         <main className="vif-main">
