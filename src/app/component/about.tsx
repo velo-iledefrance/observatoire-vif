@@ -17,6 +17,10 @@ export default function About() {
         <p className="block has-text-centered">
           Les données affichées sont mises à la disposition du public par la région <span style={{"white-space": "nowrap"} as React.CSSProperties}>Île-de-France</span> et régulièrement mises à&nbsp;jour.
         </p>
+        
+        <p className="block has-text-centered">
+          Réalisé par <Link href="https://codeursenliberte.fr/">Codeurs en Liberté</Link> et construit&nbsp;avec <Link href="https://cocarto.com">cocarto.com</Link>.
+        </p>
       </div>
     </section>
   );

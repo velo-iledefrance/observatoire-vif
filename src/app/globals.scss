@@ -427,6 +427,6 @@
 }
 
 // Component: About
-.vif-container--about {
-  padding-bottom: 150px;
+.vif-container--about :last-child {
+  padding-top: 150px;
 }
