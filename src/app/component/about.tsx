@@ -8,15 +8,14 @@ export default function About() {
         <p className="block has-text-centered">
           Cet observatoire est proposé et maintenu par le{" "}
           <Link href="https://velo-iledefrance.fr/">
-            Collectif Vélo Île-de-France
+            Collectif Vélo <span style={{"white-space": "nowrap"} as React.CSSProperties }>Île-de-France</span>
           </Link>
           . L’association est à l’origine du projet de réseau VIF, initialement
-          appelé RER V.
+          appelé&nbsp;RER&nbsp;V.
         </p>
-
+        
         <p className="block has-text-centered">
-          Les données affichées sont mises à la disposition du public par la
-          région Île-de-France et régulièrement mises à jour.
+          Les données affichées sont mises à la disposition du public par la région <span style={{"white-space": "nowrap"} as React.CSSProperties}>Île-de-France</span> et régulièrement mises à&nbsp;jour.
         </p>
       </div>
     </section>
