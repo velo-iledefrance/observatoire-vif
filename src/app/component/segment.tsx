@@ -1,4 +1,5 @@
 import { statusColor, statusLabel, moaLabel, moaName } from "@/utils/constants";
+import _ from "lodash";
 import { TronçonProperties } from "../types";
 
 function moa(segment: TronçonProperties) {
@@ -34,6 +35,19 @@ function blockingCommune(segment: TronçonProperties) {
   }
 }
 
+function RouteLogo(code: string) {
+  return <h3
+  className="route-code route-code--small"
+  style={
+    {
+      "--route-color": `var(--route-color-${code})`,
+    } as React.CSSProperties
+  }
+>
+  {code}
+</h3>
+}
+
 export default function ({
   segment,
   setHash,
@@ -41,19 +55,11 @@ export default function ({
   segment: TronçonProperties;
   setHash: (hash: string) => void;
 }) {
+  const intCode = (code: string) => parseInt(code.replace('V', ''))
   return (
     <>
       <div className="vif-detail-header vif-detail-header--segment">
-        <h3
-          className="route-code route-code--small"
-          style={
-            {
-              "--route-color": `var(--route-color-${segment.route})`,
-            } as React.CSSProperties
-          }
-        >
-          {segment.route}
-        </h3>
+        {_(segment.route).sort((a, b) => intCode(a) - intCode(b)).uniq().map(RouteLogo).value()}
         <h3 className="is-size-4">{segment.commune}</h3>
         <a
           className="vif-detail--close-button"
