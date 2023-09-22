@@ -36,7 +36,7 @@ const Part = ({
 
 function Pointer(statuses: TronçonStatus[], props: Props) {
   const text = statuses.map((status) => (
-    <div>
+    <div key={status}>
       {shortStatusLabel[status]} :{" "}
       {Math.round((100 * props.stats[status]) / props.total)}%
     </div>
@@ -80,12 +80,12 @@ export default function ProgressBar(props: Props) {
       <div className="progress-bar">
         <div className="progress-bar__parts">
           {parts.map((statuses) => (
-            <Part props={props} statuses={statuses} />
+            <Part key={statuses.join()} props={props} statuses={statuses} />
           ))}
         </div>
         <div className="progress-bar__parts-hover">
           {parts.map((statuses) => (
-            <Part props={props} statuses={statuses} pointer />
+            <Part key={statuses.join()} props={props} statuses={statuses} pointer />
           ))}
         </div>
         <div className="progress-bar__pointer">
