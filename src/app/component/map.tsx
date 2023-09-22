@@ -349,6 +349,8 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
         paddingRatio = 2.2;
       } else if (level.level === "segment") {
         paddingRatio = 4;
+      } if (level.level === "route") {
+        paddingRatio = 10;
       } else {
         paddingRatio = 1000;
       }
