@@ -14,6 +14,7 @@ export type OriginalProperties = {
   PHASE: string;
   "Au point mort": boolean | null;
   "Collectivité responsable du blocage": string | null;
+  doublon: boolean | null;
 };
 
 export enum TronçonStatus {
@@ -30,7 +31,7 @@ export type TronçonProperties = {
   id: string;
   length: number;
   status: TronçonStatus;
-  route: string;
+  route: string[];
   variant: boolean;
   commune: string | undefined;
   typeMOA: TypeMOA;

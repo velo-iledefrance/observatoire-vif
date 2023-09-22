@@ -9,7 +9,7 @@ import { fadedStatusColor, statusColor } from "@/utils/constants";
 
 function isActive(level: Level, feature: MapGeoJSONFeature): boolean {
   if (level.level === "route") {
-    return feature.properties.route === level.props.code;
+    return JSON.parse(feature.properties.route).includes(level.props.code);
   } else if (level.level === "segment") {
     return feature.properties.id === level.props.id;
   } else {
@@ -292,7 +292,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             },
             filter: ["!", ["get", "variant"]],
           });
-          
+
           newMap.moveLayer("Town labels");
           newMap.moveLayer("City labels");
         })

@@ -85,8 +85,11 @@ export async function prepareData(): Promise<GlobalData> {
     feature.geometry = buffer(feature, 0.05).geometry;
     feature.bbox = bbox(feature.geometry);
   });
+
+  const troncon_route = _(troncons.features).groupBy('properties.CODE_TRONCON').mapValues(f => _.map(f, 'properties.NUM_LIGNE')).value()
+
   const tronçonsArray: Feature<LineString, TronçonProperties>[] = // This will activate the closest `error.js` Error Boundary
-    troncons.features.map((feature) => {
+    troncons.features.filter(feature => !feature.properties.doublon).map((feature) => {
       const commune = casted.features.find((commune) => {
         if (commune.bbox && booleanWithin(feature, bboxPolygon(commune.bbox))) {
           //  const buffered = buffer(feature.geometry, 0.001); // one meter
@@ -105,7 +108,7 @@ export async function prepareData(): Promise<GlobalData> {
             ? 0
             : feature.properties.LONGUEUR,
         commune: commune?.properties.nom.replace(" Arrondissement", ""),
-        route: feature.properties.NUM_LIGNE,
+        route: troncon_route[feature.properties.CODE_TRONCON],
         status: status(
           feature.properties.NIVEAU_VALID_AMENAG || "",
           feature.properties.APPORT_RERV || "",
@@ -160,7 +163,7 @@ export async function prepareData(): Promise<GlobalData> {
   function routeStats(code: string): RouteStats {
     const t = _.filter(
       tronçonsArray,
-      (feature) => feature.properties.route === code,
+      (feature) => feature.properties.route.includes(code),
     );
     function length(status: TronçonStatus): number {
       return _(t)
