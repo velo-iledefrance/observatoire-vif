@@ -343,10 +343,19 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
     if (map.current !== null) {
       var toBounds = bounds;
       var paddingRatio;
+      var skip = false;
 
       if (oldLevel.current.level === "segment" && level.level === "region") {
         // When exiting a segment, only zoom out a bit, do not return to the whole region.
         toBounds = oldBounds.current;
+        const currentBounds = map.current.getBounds();
+        if (
+          currentBounds.contains({ lon: toBounds[0], lat: toBounds[1] }) &&
+          currentBounds.contains({ lat: toBounds[2], lon: toBounds[3] })
+        ) {
+          // Don’t zoom in if the user zoomed out themselves
+          skip = true;
+        }
         paddingRatio = 2.2;
       } else if (level.level === "segment") {
         paddingRatio = 4;
@@ -356,7 +365,9 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
         paddingRatio = 1000;
       }
 
-      setBounds(map.current, toBounds, paddingRatio);
+      if (!skip) {
+        setBounds(map.current, toBounds, paddingRatio);
+      }
 
       oldLevel.current = level;
       oldBounds.current = bounds;
