@@ -21,13 +21,13 @@ export const shortStatusLabel = {
 };
 
 export const statusColor = {
-  [TronçonStatus.PreExisting]: "#4f9c5f",
-  [TronçonStatus.Built]: "#2ed546",
-  [TronçonStatus.Building]: "#8cdc4f",
+  [TronçonStatus.PreExisting]: "#51951d",
+  [TronçonStatus.Built]: "#68c026",
+  [TronçonStatus.Building]: "#90dd55",
   [TronçonStatus.Planned]: "#fec51d",
   [TronçonStatus.Blocked]: "#DA2F4C",
   [TronçonStatus.SecondPhase]: "#FFF",
-  [TronçonStatus.Unknown]: "#7E7E7E",
+  [TronçonStatus.Unknown]: "#9E9E9E",
   ["Background"]: "#ddddd5",
 };
 
@@ -38,7 +38,7 @@ export const fadedStatusColor = {
   [TronçonStatus.Planned]: "#fcde83",
   [TronçonStatus.Blocked]: "#ea8696",
   [TronçonStatus.SecondPhase]: "#FFF",
-  [TronçonStatus.Unknown]: "#b3b3b3",
+  [TronçonStatus.Unknown]: "#b8b8b8",
 };
 
 export const moaLabel = {
