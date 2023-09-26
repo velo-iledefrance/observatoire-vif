@@ -50,7 +50,7 @@
 
   .vif-global-stats {
     > * {
-      padding-top: 20px;
+      padding-top: 18px;
     }
     > :nth-child(2) {
       order: -1;
@@ -88,12 +88,12 @@
 
   .vif-panel > *:first-child {
     padding-top: 0;
-    margin-top: -29px;
+    margin-top: -19px;
   }
 
   .vif-detail {
     position: absolute;
-    top: -30px;
+    top: -20px;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -163,7 +163,7 @@
 }
 
 .vif-detail-header--route {
-  margin-bottom: 56px;
+  margin-bottom: 50px;
   justify-content: center;
   .route-code--large {
     transform: translateY(50%);
@@ -173,7 +173,7 @@
 .vif-detail-content {
   max-width: 300px;
   margin-inline: auto;
-  margin-top: 20px;
+  margin-top: 18px;
   margin-bottom: 40px;
 }
 
@@ -312,7 +312,7 @@
 
 // Component: Progress Bar
 .progress-bar {
-  height: 46px;
+  height: 26px;
   border-radius: 29px;
   border: solid 6px #eaeae5;
   box-sizing: content-box;
@@ -323,7 +323,7 @@
 .progress-bar__parts {
   display: flex;
   flex-direction: row;
-  height: 46px;
+  height: 26px;
   clip-path: inset(0% 0% round 29px);
 }
 
