@@ -22,7 +22,7 @@ export default function GlobalStats({
         </h1>
       </div>
       <div className="vif-container vif-container--narrow vif-border-top">
-        <Legend />
+        <Legend stats={globalStats.stats} total={globalStats.total} />
       </div>
       <div className="vif-container">
         <p className="block has-text-centered">

@@ -122,7 +122,7 @@
   max-width: 250px;
 
   & > * {
-    max-width: 215px;
+    max-width: 245px;
     margin-inline: auto;
   }
 }
@@ -411,11 +411,18 @@
 }
 
 // Component: Legend
+.legend-value {
+    width: 32px;
+    display: inline-block;
+    text-align: right;
+}
+
 .legend-color {
   width: 16px;
   height: 8px;
   border-radius: 4px;
   display: inline-block;
+  margin-left: 6px;
   margin-right: 12px;
 }
 

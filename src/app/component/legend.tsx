@@ -1,7 +1,7 @@
-import { TronçonStatus } from "../types";
+import { TronçonStatus, LengthStats } from "../types";
 import { statusColor, statusLabel } from "@/utils/constants";
 
-function LegendItem({ status }: { status: TronçonStatus }) {
+function LegendItem({ stats, total, status }: { stats: LengthStats, total: number, status: TronçonStatus }) {
   const style = {
     background: statusColor[status],
     border: "none",
@@ -11,22 +11,23 @@ function LegendItem({ status }: { status: TronçonStatus }) {
   }
   return (
     <div>
+      <span className="legend-value">{Math.round((100 * stats[status]) / total)}%</span>
       <span style={style} className="legend-color" />
       <span>{statusLabel[status]}</span>
     </div>
   );
 }
 
-export default function Legend() {
+export default function Legend({stats, total}: { stats: LengthStats, total: number}) {
   return (
     <>
-      <LegendItem status={TronçonStatus.PreExisting} />
-      <LegendItem status={TronçonStatus.Built} />
-      <LegendItem status={TronçonStatus.Building} />
-      <LegendItem status={TronçonStatus.Planned} />
-      <LegendItem status={TronçonStatus.Blocked} />
-      <LegendItem status={TronçonStatus.SecondPhase} />
-      <LegendItem status={TronçonStatus.Unknown} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.PreExisting} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.Built} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.Building} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.Planned} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.Blocked} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.SecondPhase} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.Unknown} />
     </>
   );
 }
