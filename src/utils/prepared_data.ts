@@ -121,10 +121,10 @@ export async function prepareData(): Promise<GlobalData> {
             feature.properties.NIVEAU_VALID_AMENAG || "",
             feature.properties.APPORT_RERV || "",
             feature.properties.PHASE,
-            feature.properties["Au point mort"] || false,
+            feature.properties["Bloqué"] || false,
           ),
           variant:
-            !feature.properties["Au point mort"] &&
+            !feature.properties["Bloqué"] &&
             feature.properties.APPORT_RERV !== "Aménagement prééxistant" &&
             feature.properties.PHASE === "1 - 2025" &&
             feature.properties.NIVEAU_VALID_AMENAG === "A l'étude" &&

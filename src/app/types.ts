@@ -12,7 +12,7 @@ export type OriginalProperties = {
   NOM_MOA: string;
   TYPE_MOA: string;
   PHASE: string;
-  "Au point mort": boolean | null;
+  Bloqué: boolean | null;
   "Collectivité responsable du blocage": string | null;
   doublon: boolean | null;
 };

@@ -5,7 +5,7 @@ export const statusLabel = {
   [TronçonStatus.Built]: "Livré",
   [TronçonStatus.Building]: "En travaux",
   [TronçonStatus.Planned]: "En cours de discussion",
-  [TronçonStatus.Blocked]: "Au point mort",
+  [TronçonStatus.Blocked]: "Bloqué",
   [TronçonStatus.SecondPhase]: "Phase 2 (2030)",
   [TronçonStatus.Unknown]: "Inconnu",
 };
@@ -15,7 +15,7 @@ export const shortStatusLabel = {
   [TronçonStatus.Built]: "Livré",
   [TronçonStatus.Building]: "En travaux",
   [TronçonStatus.Planned]: "En discussion",
-  [TronçonStatus.Blocked]: "Au point mort",
+  [TronçonStatus.Blocked]: "Bloqué",
   [TronçonStatus.SecondPhase]: "Phase 2",
   [TronçonStatus.Unknown]: "Inconnu",
 };
