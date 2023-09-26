@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { RouteStats } from "../types";
 import ProgressBar from "./progress_bar";
+import Legend from "./legend";
 import { routeName } from "@/utils/constants";
 
 function routeDescription(name: string[]) {
@@ -52,12 +53,15 @@ export default function RouteDetails({
       </div>
       <div className="vif-detail-content">
         <div className="vif--block">
-          <ProgressBar stats={route.stats} total={route.total} global={false} />
-        </div>
-        <div className="vif--block">
           <label className="has-text-weight-normal has-text-grey">
             {routeDescription(routeName[route.code])}
           </label>
+        </div>
+        <div className="vif--block">
+          <ProgressBar stats={route.stats} total={route.total} global={false} />
+        </div>
+        <div className="vif--block vif-container vif-container--narrow vif-border-top">
+          <Legend stats={route.stats} total={route.total} />
         </div>
       </div>
     </>
