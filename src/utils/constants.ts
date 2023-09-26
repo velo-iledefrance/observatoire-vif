@@ -28,6 +28,7 @@ export const statusColor = {
   [TronçonStatus.Blocked]: "#DA2F4C",
   [TronçonStatus.SecondPhase]: "#FFF",
   [TronçonStatus.Unknown]: "#7E7E7E",
+  ["Background"]: "#ddddd5",
 };
 
 export const fadedStatusColor = {

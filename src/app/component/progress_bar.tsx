@@ -24,7 +24,7 @@ const Part = ({
     if (statuses.length == 1) {
       style["background"] = statusColor[statuses[0]];
     } else {
-      style["background"] = statusColor[TronçonStatus.Unknown];
+      style["background"] = statusColor["Background"];
     }
   }
   return (
