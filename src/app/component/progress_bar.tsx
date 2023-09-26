@@ -59,21 +59,12 @@ export default function ProgressBar(props: Props) {
         props.stats[TronçonStatus.Building])) /
     props.total;
 
-  const parts = props.global
-    ? [
-        [TronçonStatus.PreExisting],
-        [TronçonStatus.Built],
-        [TronçonStatus.Building],
-        [TronçonStatus.Planned, TronçonStatus.Blocked, TronçonStatus.Unknown],
-      ]
-    : [
-        [TronçonStatus.PreExisting],
-        [TronçonStatus.Built],
-        [TronçonStatus.Building],
-        [TronçonStatus.Planned],
-        [TronçonStatus.Blocked],
-        [TronçonStatus.Unknown],
-      ];
+  const parts = [
+    [TronçonStatus.PreExisting],
+    [TronçonStatus.Built],
+    [TronçonStatus.Building],
+    [TronçonStatus.Planned, TronçonStatus.Blocked, TronçonStatus.Unknown],
+  ];
 
   return (
     <>
