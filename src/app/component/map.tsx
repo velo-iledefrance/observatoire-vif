@@ -122,8 +122,8 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 4,
-                15, 10
+                10, 5,
+                15, 16
               ],
               "line-color": "#7f7f7f",
             },
@@ -175,8 +175,8 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 3,
-                15, 8
+                10, 4,
+                15, 10
               ],
               "line-color": "#fff",
             },
@@ -207,16 +207,17 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 1,
-                15, 3
+                10, 1.2,
+                15, 4
               ],
               "line-dasharray": [2, 1],
               "line-opacity": [
                 "case",
                 ["boolean", ["feature-state", "inactive"], false],
-                0.2,
+                0.5,
                 1,
               ],
+              "line-color": statusColor[TronçonStatus.Planned],
             },
             filter: ["get", "variant"],
           })
