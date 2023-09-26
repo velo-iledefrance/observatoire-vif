@@ -36,16 +36,18 @@ function blockingCommune(segment: TronçonProperties) {
 }
 
 function RouteLogo(code: string) {
-  return <h3
-  className="route-code route-code--small"
-  style={
-    {
-      "--route-color": `var(--route-color-${code})`,
-    } as React.CSSProperties
-  }
->
-  {code}
-</h3>
+  return (
+    <h3
+      className="route-code route-code--small"
+      style={
+        {
+          "--route-color": `var(--route-color-${code})`,
+        } as React.CSSProperties
+      }
+    >
+      {code}
+    </h3>
+  );
 }
 
 export default function ({
@@ -55,11 +57,15 @@ export default function ({
   segment: TronçonProperties;
   setHash: (hash: string) => void;
 }) {
-  const intCode = (code: string) => parseInt(code.replace('V', ''))
+  const intCode = (code: string) => parseInt(code.replace("V", ""));
   return (
     <>
       <div className="vif-detail-header vif-detail-header--segment">
-        {_(segment.route).sort((a, b) => intCode(a) - intCode(b)).uniq().map(RouteLogo).value()}
+        {_(segment.route)
+          .sort((a, b) => intCode(a) - intCode(b))
+          .uniq()
+          .map(RouteLogo)
+          .value()}
         <h3 className="is-size-4">{segment.commune}</h3>
         <a
           className="vif-detail--close-button"

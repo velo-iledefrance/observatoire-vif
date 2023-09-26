@@ -86,53 +86,61 @@ export async function prepareData(): Promise<GlobalData> {
     feature.bbox = bbox(feature.geometry);
   });
 
-  const troncon_route = _(troncons.features).groupBy('properties.CODE_TRONCON').mapValues(f => _.map(f, 'properties.NUM_LIGNE')).value()
+  const troncon_route = _(troncons.features)
+    .groupBy("properties.CODE_TRONCON")
+    .mapValues((f) => _.map(f, "properties.NUM_LIGNE"))
+    .value();
 
   const tronçonsArray: Feature<LineString, TronçonProperties>[] = // This will activate the closest `error.js` Error Boundary
-    troncons.features.filter(feature => !feature.properties.doublon).map((feature) => {
-      const commune = casted.features.find((commune) => {
-        if (commune.bbox && booleanWithin(feature, bboxPolygon(commune.bbox))) {
-          //  const buffered = buffer(feature.geometry, 0.001); // one meter
-          //  const intersection = intersect(commune, buffered);
-          return booleanWithin(feature, commune);
-        } else {
-          return false;
-        }
-      });
-      const properties: TronçonProperties = {
-        // A single tronçon can be used by many lines, the concatenation allows to deduplicate
-        id: feature.properties.CODE_TRONCON,
-        // When it is a "Variante" don’t count its length for any statistic, while "Variante initiale" means we DO use it for lengths stats
-        length:
-          feature.properties.NIVEAU_VALID_SUPPORT_VIAIRE === "Variante"
-            ? 0
-            : feature.properties.LONGUEUR,
-        commune: commune?.properties.nom.replace(" Arrondissement", ""),
-        route: troncon_route[feature.properties.CODE_TRONCON],
-        status: status(
-          feature.properties.NIVEAU_VALID_AMENAG || "",
-          feature.properties.APPORT_RERV || "",
-          feature.properties.PHASE,
-          feature.properties["Au point mort"] || false,
-        ),
-        variant:
-          !feature.properties["Au point mort"] &&
-          feature.properties.APPORT_RERV !== "Aménagement prééxistant" &&
-          feature.properties.PHASE === "1 - 2025" &&
-          feature.properties.NIVEAU_VALID_AMENAG === "A l'étude" &&
-          ["Variante", "Variante initiale"].includes(
-            feature.properties.NIVEAU_VALID_SUPPORT_VIAIRE,
+    troncons.features
+      .filter((feature) => !feature.properties.doublon)
+      .map((feature) => {
+        const commune = casted.features.find((commune) => {
+          if (
+            commune.bbox &&
+            booleanWithin(feature, bboxPolygon(commune.bbox))
+          ) {
+            //  const buffered = buffer(feature.geometry, 0.001); // one meter
+            //  const intersection = intersect(commune, buffered);
+            return booleanWithin(feature, commune);
+          } else {
+            return false;
+          }
+        });
+        const properties: TronçonProperties = {
+          // A single tronçon can be used by many lines, the concatenation allows to deduplicate
+          id: feature.properties.CODE_TRONCON,
+          // When it is a "Variante" don’t count its length for any statistic, while "Variante initiale" means we DO use it for lengths stats
+          length:
+            feature.properties.NIVEAU_VALID_SUPPORT_VIAIRE === "Variante"
+              ? 0
+              : feature.properties.LONGUEUR,
+          commune: commune?.properties.nom.replace(" Arrondissement", ""),
+          route: troncon_route[feature.properties.CODE_TRONCON],
+          status: status(
+            feature.properties.NIVEAU_VALID_AMENAG || "",
+            feature.properties.APPORT_RERV || "",
+            feature.properties.PHASE,
+            feature.properties["Au point mort"] || false,
           ),
-        typeMOA: moaType(feature.properties.TYPE_MOA || "autre"),
-        moa: feature.properties.NOM_MOA || "",
-        blockingCommune:
-          feature.properties["Collectivité responsable du blocage"],
-      };
+          variant:
+            !feature.properties["Au point mort"] &&
+            feature.properties.APPORT_RERV !== "Aménagement prééxistant" &&
+            feature.properties.PHASE === "1 - 2025" &&
+            feature.properties.NIVEAU_VALID_AMENAG === "A l'étude" &&
+            ["Variante", "Variante initiale"].includes(
+              feature.properties.NIVEAU_VALID_SUPPORT_VIAIRE,
+            ),
+          typeMOA: moaType(feature.properties.TYPE_MOA || "autre"),
+          moa: feature.properties.NOM_MOA || "",
+          blockingCommune:
+            feature.properties["Collectivité responsable du blocage"],
+        };
 
-      return lineString(feature.geometry.coordinates, properties, {
-        bbox: bbox(feature.geometry),
+        return lineString(feature.geometry.coordinates, properties, {
+          bbox: bbox(feature.geometry),
+        });
       });
-    });
 
   const phase1Tronçons = tronçonsArray.filter(
     (feature) => feature.properties.status !== TronçonStatus.SecondPhase,
@@ -161,9 +169,8 @@ export async function prepareData(): Promise<GlobalData> {
   );
 
   function routeStats(code: string): RouteStats {
-    const t = _.filter(
-      tronçonsArray,
-      (feature) => feature.properties.route.includes(code),
+    const t = _.filter(tronçonsArray, (feature) =>
+      feature.properties.route.includes(code),
     );
     function length(status: TronçonStatus): number {
       return _(t)

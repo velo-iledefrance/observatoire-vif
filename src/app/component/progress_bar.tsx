@@ -85,7 +85,12 @@ export default function ProgressBar(props: Props) {
         </div>
         <div className="progress-bar__parts-hover">
           {parts.map((statuses) => (
-            <Part key={statuses.join()} props={props} statuses={statuses} pointer />
+            <Part
+              key={statuses.join()}
+              props={props}
+              statuses={statuses}
+              pointer
+            />
           ))}
         </div>
         <div className="progress-bar__pointer">

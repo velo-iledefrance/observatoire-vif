@@ -8,18 +8,24 @@ export default function About() {
         <p className="block has-text-centered">
           Cet observatoire est proposé et maintenu par le{" "}
           <Link href="https://velo-iledefrance.fr/">
-            Collectif Vélo <span style={{whiteSpace: "nowrap"}}>Île-de-France</span>
+            Collectif Vélo{" "}
+            <span style={{ whiteSpace: "nowrap" }}>Île-de-France</span>
           </Link>
           . L’association est à l’origine du projet de réseau VIF, initialement
           appelé&nbsp;RER&nbsp;V.
         </p>
-        
+
         <p className="block has-text-centered">
-          Les données affichées sont mises à la disposition du public par la région <span style={{whiteSpace: "nowrap"}}>Île-de-France</span> et régulièrement mises à&nbsp;jour.
+          Les données affichées sont mises à la disposition du public par la
+          région <span style={{ whiteSpace: "nowrap" }}>Île-de-France</span> et
+          régulièrement mises à&nbsp;jour.
         </p>
-        
+
         <p className="block has-text-centered">
-          Réalisé par <Link href="https://codeursenliberte.fr/">Codeurs en Liberté</Link> et construit&nbsp;avec <Link href="https://cocarto.com">cocarto.com</Link>.
+          Réalisé par{" "}
+          <Link href="https://codeursenliberte.fr/">Codeurs en Liberté</Link> et
+          construit&nbsp;avec{" "}
+          <Link href="https://cocarto.com">cocarto.com</Link>.
         </p>
       </div>
     </section>
