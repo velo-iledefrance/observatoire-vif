@@ -14,6 +14,7 @@ export type OriginalProperties = {
   PHASE: string;
   Bloqué: boolean | null;
   "Collectivité responsable du blocage": string | null;
+  Commentaire: string | null;
   doublon: boolean | null;
 };
 
@@ -37,6 +38,7 @@ export type TronçonProperties = {
   typeMOA: TypeMOA;
   moa: string;
   blockingCommune: string | null;
+  comment: string | null;
 };
 
 export type AdminExpressProperties = {

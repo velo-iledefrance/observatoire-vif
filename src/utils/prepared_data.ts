@@ -135,6 +135,7 @@ export async function prepareData(): Promise<GlobalData> {
           moa: feature.properties.NOM_MOA || "",
           blockingCommune:
             feature.properties["Collectivité responsable du blocage"],
+          comment: feature.properties.Commentaire,
         };
 
         return lineString(feature.geometry.coordinates, properties, {

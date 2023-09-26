@@ -21,14 +21,23 @@ function moa(segment: TronçonProperties) {
 function blockingCommune(segment: TronçonProperties) {
   if (segment.blockingCommune) {
     return (
-      <div className="vif--block">
-        <label className="has-text-weight-normal has-text-grey">
-          Collectivité responsable du blocage
-        </label>
-        <p className="is-size-5 has-text-weight-semibold">
-          {segment.blockingCommune}
-        </p>
-      </div>
+      <>
+        <div className="vif--block">
+          <label className="has-text-weight-normal has-text-grey">
+            Collectivité responsable du blocage
+          </label>
+          <p className="is-size-5 has-text-weight-semibold">
+            {segment.blockingCommune}
+          </p>
+        </div>
+        {segment.comment && (
+          <div className="vif--block">
+            <p className="has-text-weight-normal has-text-grey">
+              {segment.comment}
+            </p>
+          </div>
+        )}
+      </>
     );
   } else {
     return null;
