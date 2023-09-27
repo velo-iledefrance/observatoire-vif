@@ -1,4 +1,6 @@
 import { TronçonStatus, TypeMOA } from "@/app/types";
+import Color from "color";
+import _ from "lodash";
 
 export const statusLabel = {
   [TronçonStatus.PreExisting]: "Préexistant au 01/01/2022",
@@ -21,25 +23,17 @@ export const shortStatusLabel = {
 };
 
 export const statusColor = {
-  [TronçonStatus.PreExisting]: "#51951d",
-  [TronçonStatus.Built]: "#68c026",
-  [TronçonStatus.Building]: "#90dd55",
-  [TronçonStatus.Planned]: "#fec51d",
-  [TronçonStatus.Blocked]: "#DA2F4C",
+  [TronçonStatus.PreExisting]: "#AAC3B0",
+  [TronçonStatus.Built]: "#0BBC3F",
+  [TronçonStatus.Building]: "#79E70F",
+  [TronçonStatus.Planned]: "#7FCCDD",
+  [TronçonStatus.Blocked]: "#E95353",
   [TronçonStatus.SecondPhase]: "#FFF",
-  [TronçonStatus.Unknown]: "#9E9E9E",
+  [TronçonStatus.Unknown]: "#D0D0D0",
   ["Background"]: "#ddddd5",
 };
 
-export const fadedStatusColor = {
-  [TronçonStatus.PreExisting]: "#a3d1af",
-  [TronçonStatus.Built]: "#8aefa4",
-  [TronçonStatus.Building]: "#b7ec8a",
-  [TronçonStatus.Planned]: "#fcde83",
-  [TronçonStatus.Blocked]: "#ea8696",
-  [TronçonStatus.SecondPhase]: "#FFF",
-  [TronçonStatus.Unknown]: "#b8b8b8",
-};
+export const fadedStatusColor = _.mapValues(statusColor, c => Color(c).lighten(0.2).hex());
 
 export const moaLabel = {
   [TypeMOA.Commune]: "Commune",
