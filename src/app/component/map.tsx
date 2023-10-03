@@ -86,7 +86,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 8,
+                10, 10,
                 15, 30,
               ],
               "line-color": "#fff",
@@ -101,7 +101,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 8,
+                10, 10,
                 15, 30,
               ],
               "line-color": "#aaa",
@@ -122,7 +122,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 5,
+                10, 6,
                 15, 16
               ],
               "line-color": "#7f7f7f",
@@ -138,7 +138,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 5,
+                10, 7,
                 15, 16
               ],
               "line-color": "#7f7f7f",
@@ -154,7 +154,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 7,
+                10, 8,
                 15, 20
               ],
               "line-color": "#4c4c4c",
@@ -175,7 +175,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 4,
+                10, 5,
                 15, 10
               ],
               "line-color": "#fff",
@@ -191,7 +191,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 4,
+                10, 5,
                 15, 10
               ],
               "line-color": "#fff",
@@ -207,7 +207,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             type: "line",
             paint: {
               "line-width": ["interpolate", ["linear"], ["zoom"],
-                10, 1.2,
+                10, 2,
                 15, 4
               ],
               "line-dasharray": [2, 1],
@@ -229,19 +229,21 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
                 "interpolate",
                 ["linear"],
                 ["zoom"],
-                // at zoom level 10, the line-width is either 3 or 2
+                // at zoom level 10, the line-width is either 4 or 3
                 10, [ "match", ["get", "status"],
-                  TronçonStatus.PreExisting, 3,
-                  TronçonStatus.Built, 3,
-                  TronçonStatus.Building, 3,
-                  TronçonStatus.Blocked, 3,
-                  2,
+                  TronçonStatus.PreExisting, 4,
+                  TronçonStatus.Built, 4,
+                  TronçonStatus.Building, 4,
+                  TronçonStatus.Blocked, 4,
+                  TronçonStatus.Planned, 4,
+                  3,
                 ],
                 15, [ "match", ["get", "status"],
                   TronçonStatus.PreExisting, 10,
                   TronçonStatus.Built, 10,
                   TronçonStatus.Building, 10,
                   TronçonStatus.Blocked, 10,
+                  TronçonStatus.Planned, 10,
                   6,
                 ],
               ],
@@ -261,19 +263,21 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
                 "interpolate",
                 ["linear"],
                 ["zoom"],
-                // at zoom level 10, the line-width is either 3 or 2
+                // at zoom level 10, the line-width is either 5 or 3
                 10, [ "match", ["get", "status"],
-                  TronçonStatus.PreExisting, 3,
-                  TronçonStatus.Built, 3,
-                  TronçonStatus.Building, 3,
-                  TronçonStatus.Blocked, 3,
-                  2,
+                  TronçonStatus.PreExisting, 4,
+                  TronçonStatus.Built, 4,
+                  TronçonStatus.Building, 4,
+                  TronçonStatus.Blocked, 4,
+                  TronçonStatus.Planned, 4,
+                  3,
                 ],
                 15, [ "match", ["get", "status"],
                   TronçonStatus.PreExisting, 10,
                   TronçonStatus.Built, 10,
                   TronçonStatus.Building, 10,
                   TronçonStatus.Blocked, 10,
+                  TronçonStatus.Planned, 10,
                   6,
                 ],
               ],
