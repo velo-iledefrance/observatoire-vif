@@ -23,17 +23,26 @@ export const shortStatusLabel = {
 };
 
 export const statusColor = {
-  [TronçonStatus.PreExisting]: "#AAC3B0",
+  [TronçonStatus.PreExisting]: "#B6D2BE",
   [TronçonStatus.Built]: "#0BBC3F",
   [TronçonStatus.Building]: "#79E70F",
   [TronçonStatus.Planned]: "#7FCCDD",
   [TronçonStatus.Blocked]: "#E95353",
   [TronçonStatus.SecondPhase]: "#FFF",
-  [TronçonStatus.Unknown]: "#D0D0D0",
+  [TronçonStatus.Unknown]: "#E7E7E7",
   ["Background"]: "#ddddd5",
 };
 
 export const fadedStatusColor = _.mapValues(statusColor, c => Color(c).lighten(0.2).hex());
+export const statusIndex = {
+  [TronçonStatus.PreExisting]: 2,
+  [TronçonStatus.Built]: 5,
+  [TronçonStatus.Building]: 4,
+  [TronçonStatus.Planned]: 3,
+  [TronçonStatus.Blocked]: 6,
+  [TronçonStatus.SecondPhase]: 0,
+  [TronçonStatus.Unknown]: 1,
+}
 
 export const moaLabel = {
   [TypeMOA.Commune]: "Commune",

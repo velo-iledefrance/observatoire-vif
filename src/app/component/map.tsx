@@ -5,7 +5,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import _ from "lodash";
 import { FeatureCollection, LineString } from "@turf/helpers";
 import { Level, TronçonProperties, TronçonStatus } from "../types";
-import { fadedStatusColor, statusColor } from "@/utils/constants";
+import { fadedStatusColor, statusColor, statusIndex } from "@/utils/constants";
 
 function isActive(level: Level, feature: MapGeoJSONFeature): boolean {
   if (level.level === "route") {
@@ -252,6 +252,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             layout: {
               "line-cap": "round",
               "line-join": "round",
+              "line-sort-key": ["get", ["get", "status"], ["literal", statusIndex] ],
             },
             filter: ["!", ["get", "variant"]],
           })
@@ -294,6 +295,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             layout: {
               "line-cap": "round",
               "line-join": "round",
+              "line-sort-key": ["get", ["get", "status"], ["literal", statusIndex] ],
             },
             filter: ["!", ["get", "variant"]],
           });
