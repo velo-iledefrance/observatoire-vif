@@ -99,7 +99,7 @@ export default function ProgressBar(props: Props) {
       </div>
       {props.global && (
         <div className="title is-size-5 has-text-centered">
-          État d’avancement du réseau VIF
+          État d’avancement de la phase&nbsp;1 du réseau VIF (2025)
         </div>
       )}
     </>
