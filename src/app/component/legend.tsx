@@ -20,7 +20,7 @@ function LegendItem({
   return (
     <div>
       <span className="legend-value">
-        {Math.round((100 * stats[status]) / total)}%
+        {status !== TronçonStatus.SecondPhase ? Math.round((100 * stats[status]) / total) + '%' : ''}
       </span>
       <span style={style} className="legend-color" />
       <span>{statusLabel[status]}</span>
@@ -46,12 +46,12 @@ export default function Legend({
       <LegendItem stats={stats} total={total} status={TronçonStatus.Building} />
       <LegendItem stats={stats} total={total} status={TronçonStatus.Planned} />
       <LegendItem stats={stats} total={total} status={TronçonStatus.Blocked} />
+      <LegendItem stats={stats} total={total} status={TronçonStatus.Unknown} />
       <LegendItem
         stats={stats}
         total={total}
         status={TronçonStatus.SecondPhase}
       />
-      <LegendItem stats={stats} total={total} status={TronçonStatus.Unknown} />
     </>
   );
 }
