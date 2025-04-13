@@ -22,6 +22,7 @@ import {
   width,
   widthFromStatus,
 } from "../style_helpers";
+import { Protocol } from "pmtiles";
 
 function isActive(level: Level, feature: MapGeoJSONFeature): boolean {
   if (level.level === "route") {
@@ -80,6 +81,9 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
   const [mapViewport, setMapViewport] = useState<null | LngLatBounds>(null);
   let hoveredSegment: null | string | number = null;
 
+  let protocol = new Protocol();
+  maplibregl.addProtocol("pmtiles", protocol.tile);
+
   useEffect(() => {
     if (map.current) return;
 
@@ -87,7 +91,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
     const newMap = new maplibregl.Map({
       container: mapContainer.current || "",
       bounds: new LngLatBounds(bounds),
-      style: `https://api.maptiler.com/maps/db0b0c2f-dcff-45fd-aa4d-0ddb0228e342/style.json?key=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`,
+      style: `style.json`,
     })
       .on("load", () => {
         newMap
