@@ -7,10 +7,12 @@
   padding-top: 20px;
   padding-bottom: 40px;
   padding-inline: 28px;
-  & > *:not(:first-child) {
+
+  &>*:not(:first-child) {
     padding-top: 20px;
   }
-  & > *:not(:last-child) {
+
+  &>*:not(:last-child) {
     padding-bottom: 20px;
   }
 }
@@ -20,6 +22,7 @@
 }
 
 // Main layout: desktop
+$desktop: 960px;
 @media screen and (min-width: $desktop) {
   // vif-map on the left,
   // vif-panel on the right, scrolling its content,
@@ -49,9 +52,10 @@
   }
 
   .vif-global-stats {
-    > * {
+    >* {
       padding-top: 18px;
     }
+
     > :nth-child(2) {
       order: -1;
     }
@@ -86,7 +90,7 @@
     position: relative;
   }
 
-  .vif-panel > *:first-child {
+  .vif-panel>*:first-child {
     padding-top: 0;
     margin-top: -19px;
   }
@@ -121,7 +125,7 @@
 .vif-container--narrow {
   max-width: 250px;
 
-  & > * {
+  &>* {
     max-width: 245px;
     margin-inline: auto;
   }
@@ -165,6 +169,7 @@
 .vif-detail-header--route {
   margin-bottom: 50px;
   justify-content: center;
+
   .route-code--large {
     transform: translateY(50%);
   }
@@ -200,12 +205,12 @@
 
 // Element: generic block
 .vif--block {
-  * + * {
+  *+* {
     margin-top: 0px;
   }
 }
 
-.vif--block + .vif--block {
+.vif--block+.vif--block {
   margin-top: 20px;
 }
 
@@ -213,7 +218,8 @@
 .vif-global-stats {
   display: flex;
   flex-flow: column;
-  > * {
+
+  >* {
     width: 100%;
   }
 }
@@ -238,6 +244,7 @@
   --route-color-V10: #f3a5ba;
   --route-color-V20: #8c5c2a;
   position: relative;
+
   &:before,
   &:after {
     border: solid;
@@ -247,9 +254,11 @@
     width: 80%;
     content: "";
   }
+
   &:before {
     top: 10%;
   }
+
   &:after {
     bottom: 10%;
   }
@@ -260,6 +269,7 @@
   border-radius: 4px;
   width: 32px;
   height: 32px;
+
   &:before,
   &:after {
     border-width: 1.5px;
@@ -272,6 +282,7 @@
   font-size: 1.8rem;
   width: 56px;
   height: 56px;
+
   &:before,
   &:after {
     border-width: 2px;
@@ -343,6 +354,7 @@
 }
 
 @media screen and (max-width: $desktop) {
+
   // Tweak the main progress bar border on mobile
   .vif-global-stats .progress-bar {
     border-color: #f1ede2;
@@ -365,7 +377,7 @@
   left: 50%;
 }
 
-.progress-bar__parts-hover:hover ~ .progress-bar__pointer {
+.progress-bar__parts-hover:hover~.progress-bar__pointer {
   display: none;
 }
 
@@ -415,7 +427,7 @@
 }
 
 // Component: Legend
-.legend__group + .legend__group {
+.legend__group+.legend__group {
   margin-block-start: 12px;
 }
 

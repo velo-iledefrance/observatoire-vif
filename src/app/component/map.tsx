@@ -93,7 +93,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
       bounds: new LngLatBounds(bounds),
       style: `style.json`,
     })
-      .on("load", () => {
+    newMap.on("load", () => {
         newMap
           .addSource("vif", {
             type: "geojson",
@@ -205,13 +205,14 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
           newMap.moveLayer("Town labels");
           newMap.moveLayer("City labels");
         })
-      .on("moveend", () => { setMapViewport(newMap.getBounds()) })
-      .on("click", () => setHash("region") )
-      .on("click", "base-outer-white", (tronçon) => {
+      newMap.on("moveend", () => { setMapViewport(newMap.getBounds()) })
+      newMap.on("click", () => setHash("region") )
+      newMap.on("click", "base-outer-white", (tronçon) => {
         if (tronçon.features !== undefined && tronçon.features.length > 0) {
           setHash(`segment/${tronçon.features[0].id}`);
         }
-      }).on("mousemove", "base-outer-white", (tronçon) => {
+      })
+      newMap.on("mousemove", "base-outer-white", (tronçon) => {
         if (tronçon.features !== undefined && tronçon.features.length > 0) {
           newMap.getCanvas().style.cursor = "pointer";
           if (hoveredSegment) {
@@ -226,7 +227,8 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
             {hover: true}
           );
         }
-      }).on('mouseleave', 'base-outer-white', () => {
+      })
+      newMap.on('mouseleave', 'base-outer-white', () => {
         newMap.getCanvas().style.cursor = "";
         if (hoveredSegment) {
             newMap.setFeatureState(
