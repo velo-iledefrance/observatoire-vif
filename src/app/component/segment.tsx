@@ -56,6 +56,7 @@ function comment(segment: TronçonProperties) {
 function RouteLogo(code: string) {
   return (
     <h3
+      key={code}
       className="route-code route-code--small"
       style={
         {
