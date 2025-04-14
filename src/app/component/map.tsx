@@ -75,7 +75,7 @@ type Props = {
 };
 
 export default function Map({ bounds, segments, level, setHash }: Props) {
-  const mapContainer = useRef<null | HTMLElement>(null);
+  const mapContainer = useRef<null | HTMLDivElement>(null);
   const map = useRef<null | maplibregl.Map>(null);
   const [mapReady, setMapReady] = useState(false);
   const [mapViewport, setMapViewport] = useState<null | LngLatBounds>(null);
@@ -291,7 +291,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
   }, [mapViewport, level]);
 
   return (
-    <div ref={(el) => (mapContainer.current = el)} className="vif-map">
+    <div ref={mapContainer} className="vif-map">
       <figure className="vif-map--logo">
         <img src="logo_cvidf.png" alt="Logo du collectif vélo Île-de-France" />
       </figure>
