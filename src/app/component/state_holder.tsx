@@ -2,12 +2,13 @@
 import Map from "./map";
 import RouteList from "./routes_list";
 import { useEffect, useState } from "react";
-import { Level, GlobalData } from "../types";
+import { Level, GlobalData, TronçonProperties } from "../types";
 import RouteDetails from "./route_details";
 import GlobalStats from "./global_stats";
 import Segment from "./segment";
 import About from "./about";
 import _ from "lodash";
+import { Feature, LineString } from "geojson";
 
 function currentDetail(
   level: Level,
@@ -52,7 +53,7 @@ export default function ({ data }: { data: GlobalData }) {
       setLevel({ level: "route", props });
     } else if (level === "segment") {
       const tronçon = data.tronçons.features.find(
-        (f) => f.properties.id === id,
+        (f: Feature<LineString, TronçonProperties>) => f.properties.id === id,
       );
       if (tronçon !== undefined && tronçon.bbox !== undefined) {
         const [xmin, ymin, xmax, ymax] = tronçon.bbox;
