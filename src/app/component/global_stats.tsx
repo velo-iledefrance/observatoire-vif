@@ -2,7 +2,7 @@ import { GlobalStats } from "../types";
 import ProgressBar from "./progress_bar";
 import Legend from "./legend";
 
-export default function GlobalStats({
+export default function GlobalStatsComponent({
   globalStats,
 }: {
   globalStats: GlobalStats;
