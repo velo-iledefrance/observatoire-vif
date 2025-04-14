@@ -1,9 +1,9 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
-import maplibregl, { LngLatBounds, MapGeoJSONFeature } from "maplibre-gl";
+import maplibregl, { LngLatBounds, GeoJSONFeature } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import _ from "lodash";
-import { FeatureCollection, LineString } from "@turf/helpers";
+import { FeatureCollection, LineString } from "geojson";
 import { Level, TronçonProperties, TronçonStatus } from "../types";
 import {
   fadedStatusColor,
@@ -24,7 +24,7 @@ import {
 } from "../style_helpers";
 import { Protocol } from "pmtiles";
 
-function isActive(level: Level, feature: MapGeoJSONFeature): boolean {
+function isActive(level: Level, feature: GeoJSONFeature): boolean {
   if (level.level === "route") {
     return JSON.parse(feature.properties.route).includes(level.props.code);
   } else if (level.level === "segment") {

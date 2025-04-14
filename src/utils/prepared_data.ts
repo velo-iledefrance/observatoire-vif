@@ -1,11 +1,13 @@
 import {
   Feature,
   FeatureCollection,
-  featureCollection,
-  lineString,
   LineString,
   MultiPolygon,
   Polygon,
+} from "geojson";
+import {
+  featureCollection,
+  lineString,
 } from "@turf/helpers";
 import _ from "lodash";
 import {

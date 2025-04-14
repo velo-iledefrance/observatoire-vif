@@ -1,4 +1,4 @@
-import { FeatureCollection, LineString } from "@turf/helpers";
+import { FeatureCollection, LineString } from "geojson";
 
 export type Bounds = [number, number, number, number];
 
