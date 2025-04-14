@@ -86,12 +86,12 @@ async function fetchFromCocarto(): Promise<
 export async function prepareData(): Promise<GlobalData> {
   const troncons = await fetchFromCocarto();
   const castedCommunes = communes as FeatureCollection<
-    MultiPolygon,
+    Polygon | MultiPolygon,
     AdminExpressProperties
   >;
   featureEach(castedCommunes, (feature) => {
     // We add a buffer to be more tolerant with segments that might be drawn by error touching a other comune
-    feature.geometry = buffer(feature, 0.05).geometry;
+    feature.geometry = buffer(feature, 0.05)!.geometry;
     feature.bbox = bbox(feature.geometry);
   });
 
