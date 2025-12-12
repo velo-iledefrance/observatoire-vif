@@ -11,7 +11,7 @@ L’observatoire est un site statique, réalisé avec [next.js](https://nextjs.o
 - Outre la génération du html, le projet récupère les données depuis cocarto et prépare le contenu à afficher pour chaque segment. Notamment, les données des communes sont rajoutées à partir de `./data/communes-ile-de-france.geo.json`.
 - La carte est réalisée avec maplibre, et utilise un fond de carte préparé sur maptiler.com et dont les données sont fournies par [Tuiles en Liberté](https://tuiles.enliberte.fr).
 
-Ces deux variables d’environnement sont nécessaires:
+Cette variable d’environnement est nécessaire:
 
 ```
 COCARTO_TOKEN= # token de partage de la carte sur cocarto
