@@ -17,7 +17,7 @@ export default function About() {
 
         <p className="block has-text-centered">
           Réalisé par{" "}
-          <Link href="https://codeursenliberte.fr/">Codeurs en Liberté</Link> et
+          <Link href="https://codeureusesenliberte.fr/">Codeur·euses en Liberté</Link> et
           construit&nbsp;avec{" "}
           <Link href="https://cocarto.com">cocarto.com</Link>.
         </p>

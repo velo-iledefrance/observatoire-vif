@@ -1,8 +1,8 @@
 # Observatoire du réseau Vélo Île-de-France (VIF)
 
-Ce dépôt est le code source du site de l’observatoire du réseau vélo Île-de-France. L’observatoire est proposé et maintenu par le [Collectif Vélo Île-de-France](https://velo-iledefrance.fr). L’association est à l’origine du projet de réseau VIF, initialement appelé RER V. Le projet est réalisé par [Codeurs en Liberté](https://codeursenliberte.fr).
+Ce dépôt est le code source du site de l’observatoire du réseau vélo Île-de-France. L’observatoire est proposé et maintenu par le [Collectif Vélo Île-de-France](https://velo-iledefrance.fr). L’association est à l’origine du projet de réseau VIF, initialement appelé RER V. Le site est réalisé par [Codeur·euses en Liberté](https://codeureusesenliberte.fr).
 
-Les données affichées sont mises à la disposition du public par la région Île-de-France et régulièrement mises à jour. [cocarto](https://cocarto.com), développé par Codeurs en Liberté, permet d’ajouter aux données de la région des observations du collectif.
+Les données affichées sont mises à la disposition du public par la région Île-de-France et régulièrement mises à jour. [cocarto](https://cocarto.com), développé par Codeur·euses en Liberté, permet d’ajouter aux données de la région des observations du collectif.
 
 ## Environnement technique
 
@@ -38,5 +38,3 @@ yarn build
 ```
 
 génère un site statique dans le dossier `./out`.
-
-##
