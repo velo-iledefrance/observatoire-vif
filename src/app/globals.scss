@@ -18,6 +18,10 @@
   }
 }
 
+.section.vif-phases-stats, .section.route-list {
+  background-color: RGBA(0, 138, 172, 0.07);
+}
+
 .title:not(:last-child) {
   margin-bottom: 20px;
 }
@@ -52,7 +56,7 @@ $desktop: 960px;
     border-left: solid 1px #d8d7d3;
   }
 
-  .vif-global-stats {
+  .vif-network-info {
     >* {
       padding-top: 18px;
     }
@@ -216,7 +220,7 @@ $desktop: 960px;
 }
 
 // Component: global-stats
-.vif-global-stats {
+.vif-network-info {
   display: flex;
   flex-flow: column;
 
@@ -292,7 +296,7 @@ $desktop: 960px;
 
 // Component: RouteList
 .route-list {
-  background-color: RGBA(0, 138, 172, 0.07);
+  // background-color: RGBA(0, 138, 172, 0.07);
 }
 
 .route-list-icons {
@@ -357,7 +361,7 @@ $desktop: 960px;
 @media screen and (max-width: $desktop) {
 
   // Tweak the main progress bar border on mobile
-  .vif-global-stats .progress-bar {
+  .vif-network-info .progress-bar {
     border-color: #f1ede2;
     outline: solid 1px #ddd;
   }
@@ -384,6 +388,7 @@ $desktop: 960px;
 
 .progress-bar__pointer {
   margin-block-start: 14px;
+  z-index: 1;
 }
 
 .progress-bar__arrow {
@@ -422,13 +427,63 @@ $desktop: 960px;
   font-size: 1rem;
 }
 
+.section.vif-phases-stats {
+  padding-bottom: 20px;
+  .vif-container {
+    display: flex;
+    gap: 1em;
+    margin-inline: 0;
+  }
+}
+
+.vif-phase {
+  display: block;
+  width: 100%;
+}
+
+.vif-phase:has(~ [aria-pressed="true"]), [aria-pressed="true"]~.vif-phase{
+  opacity: 50%
+}
+
+.vif-phase {
+  .progress-bar {
+    height: 15px;
+    border-radius: 15px;
+    border-width: 4px;
+    margin-block-end: 40px;
+  }
+  .progress-bar__parts {
+    height: 15px;
+  }
+  .progress-bar__pointer {
+    margin-block-start: 10px;
+  }
+  .progress-bar__arrow {
+    width: 13px;
+    height: 6px;
+  }
+  .progress-bar__bubble {
+    width: max-content;
+    padding-inline: 10px;
+    border-radius: 14px;
+  }
+  .progress-bar__bubble--black {
+    line-height: 20px;
+    font-size: 1rem;
+  }
+  .progress-bar__bubble--gray {
+    padding-block: 4px;
+    font-size: .9rem;
+  }
+}
+
 // Maplibre overrides
 .maplibregl-control-container .maplibregl-ctrl-bottom-right {
   bottom: 25px;
 }
 
 // Component: Legend
-.legend__group+.legend__group {
+.legend__group+.legend__group { // useless now?
   margin-block-start: 12px;
 }
 

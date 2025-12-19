@@ -2,13 +2,13 @@ import { GlobalStats } from "../types";
 import ProgressBar from "./progress_bar";
 import Legend from "./legend";
 
-export default function GlobalStatsComponent({
+export default function NetworkInfo({
   globalStats,
 }: {
   globalStats: GlobalStats;
 }) {
   return (
-    <section className="section vif-global-stats">
+    <section className="section vif-network-info">
       <div className="vif-container">
         <ProgressBar
           stats={globalStats.stats}
@@ -34,8 +34,7 @@ export default function GlobalStatsComponent({
           <span>
             {" "}
             Le&nbsp;projet est porté par la Région{" "}
-            <span style={{ whiteSpace: "nowrap" }}>Île-de-France</span>. Une
-            première moitié doit être déployée d’ici 2025, l’autre d’ici 2030.
+            <span style={{ whiteSpace: "nowrap" }}>Île-de-France</span>.
             Cet observatoire rend compte de l’avancement du projet.
           </span>
         </p>

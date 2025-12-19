@@ -42,7 +42,7 @@ function Pointer(statuses: TronçonStatus[], props: Props) {
     </div>
   ));
   return (
-    <div className="progress-bar__pointer progress-bar__pointer">
+    <div className="progress-bar__pointer">
       <div className="progress-bar__arrow progress-bar__arrow--gray"></div>
       <div className="progress-bar__bubble progress-bar__bubble--gray">
         {text}
@@ -99,7 +99,7 @@ export default function ProgressBar(props: Props) {
       </div>
       {props.global && (
         <div className="title is-size-5 has-text-centered">
-          État d’avancement de la phase&nbsp;1 du réseau VIF (2025)
+          État d’avancement du réseau VIF
         </div>
       )}
     </>

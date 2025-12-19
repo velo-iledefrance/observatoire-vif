@@ -1,4 +1,4 @@
-import { statusColor, statusLabel, moaLabel, moaName } from "@/utils/constants";
+import { statusColor, statusLabel, moaLabel, moaName, phaseName } from "@/utils/constants";
 import _ from "lodash";
 import { TronçonProperties } from "../types";
 
@@ -95,7 +95,7 @@ export default function Segment ({
       <div className="vif-detail-content">
         <div className="vif--block">
           <label className="has-text-weight-normal has-text-grey">
-            Avancement
+            {phaseName[segment.phase]}
           </label>
           <p className="is-size-4 has-text-weight-semibold">
             {statusLabel[segment.status]}

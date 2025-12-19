@@ -35,22 +35,6 @@ function LegendItem({
   );
 }
 
-function SecondPhaseLegendItem() {
-  const style = {
-    background: statusColor[TronçonStatus.SecondPhase],
-    outline: "solid 1px #7f7f7f",
-  };
-
-  return (
-    <div className="legend__item">
-      <span className="legend__item-value"></span>
-      <span style={style} className="legend__item-color" />
-      <span>{statusLabel[TronçonStatus.SecondPhase]}</span>
-      <LegendTooltip text={statusTooltip[TronçonStatus.SecondPhase]} />
-    </div>
-  );
-}
-
 function VariantLegenditem() {
   const style = {
     background:
@@ -117,10 +101,6 @@ export default function Legend({
           total={total}
           status={TronçonStatus.Unknown}
         />
-      </div>
-      <div className="legend__group">
-        <SecondPhaseLegendItem />
-        <VariantLegenditem />
       </div>
     </>
   );
