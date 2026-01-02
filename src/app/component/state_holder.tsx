@@ -4,7 +4,7 @@ import RouteList from "./routes_list";
 import { useEffect, useState } from "react";
 import { Level, GlobalData, TronçonProperties } from "../types";
 import RouteDetails from "./route_details";
-import GlobalStats from "./global_stats";
+import NetworkInfo from "./network_info";
 import Segment from "./segment";
 import About from "./about";
 import _ from "lodash";
@@ -27,6 +27,12 @@ function currentDetail(
 }
 
 export default function StateHolder ({ data }: { data: GlobalData }) {
+  _.forEach(data.phases, (stat, phase) => {
+    console.log(`Statistiques pour la phase ${phase}`);
+    console.log(`Longueur totale considérée : ${stat.total} mètres`);
+    console.log(stat.stats);
+  });
+
   _.forEach(data.departementStats, (stat, dep) => {
     console.log(`Statistiques pour le département ${dep}`);
     console.log(`Longueur totale considérée : ${stat.total} mètres`);
@@ -46,6 +52,10 @@ export default function StateHolder ({ data }: { data: GlobalData }) {
     if (level === "" || level === "region") {
       setBounds(data.globalBounds);
       setLevel({ level: "region" });
+    } else if (level === "phase" && id !== null) {
+      const props = data.phases[id];
+      setBounds(data.globalBounds); // prefer the global bounds to the phase bounds (props.bounds)
+      setLevel({ level: "phase", props });
     } else if (level === "route" && id !== null) {
       const props = data.routes[id];
       setBounds(props.bounds);
@@ -73,7 +83,7 @@ export default function StateHolder ({ data }: { data: GlobalData }) {
         setHash={setHash}
       />
       <div className="vif-panel">
-        <GlobalStats globalStats={data.globalStats} />
+        <NetworkInfo globalStats={data.globalStats} phases={data.phases} level={level} setHash={setHash} />
         <RouteList routes={data.routes} level={level} setHash={setHash} />
         <About />
         <div className="vif-detail">{currentDetail(level, setHash)}</div>

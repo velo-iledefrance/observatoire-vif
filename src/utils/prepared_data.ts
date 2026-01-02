@@ -14,8 +14,10 @@ import {
   TronçonStatus,
   TronçonProperties,
   RoutesMap,
+  PhasesMap,
   Bounds,
   RouteStats,
+  PhaseStats,
   GlobalStats,
   TypeMOA,
   LengthStats,
@@ -23,6 +25,7 @@ import {
   OriginalProperties,
   AdminExpressProperties,
   DepartementMap,
+  TronçonPhase,
 } from "@/app/types";
 import bbox from "@turf/bbox";
 import bboxPolygon from "@turf/bbox-polygon";
@@ -38,17 +41,19 @@ const mappingNiveau: { [fromCocarto: string]: TronçonStatus } = {
   "Mis en service": TronçonStatus.Built,
 };
 
+const mappingPhase: { [fromCarto: string]: TronçonPhase} = {
+  "1 - 2025": TronçonPhase.Une,
+  "2 - 2030": TronçonPhase.Deux
+};
+
 function status(
   status_selon_idf: string,
   apport_rerv: string,
-  phase: string,
   mort: boolean,
   status_override: string,
 ): TronçonStatus {
   if (mort) {
     return TronçonStatus.Blocked;
-  } else if (phase === "2 - 2030") {
-    return TronçonStatus.SecondPhase;
   } else if (status_override !== "") {
     return mappingNiveau[status_override] || TronçonStatus.Unknown;
   } else if (apport_rerv === "Aménagement prééxistant") {
@@ -141,10 +146,10 @@ export async function prepareData(): Promise<GlobalData> {
           status: status(
             feature.properties.NIVEAU_VALID_AMENAG || "",
             feature.properties.APPORT_RERV || "",
-            feature.properties.PHASE,
             feature.properties["Bloqué"] || false,
             feature.properties["Niveau aménagement manuel"] || "",
           ),
+          phase: mappingPhase[feature.properties.PHASE],
           variant: ["Variante", "Variante initiale"].includes(
             feature.properties.NIVEAU_VALID_SUPPORT_VIAIRE,
           ),
@@ -160,10 +165,7 @@ export async function prepareData(): Promise<GlobalData> {
         });
       });
 
-  const phase1Tronçons = tronçonsArray.filter(
-    (feature) => feature.properties.status !== TronçonStatus.SecondPhase,
-  );
-  const [xmin, ymin, xmax, ymax] = bbox(featureCollection(phase1Tronçons));
+  const [xmin, ymin, xmax, ymax] = bbox(featureCollection(tronçonsArray));
   const globalBounds: Bounds = [xmin, ymin, xmax, ymax];
 
   const tronçons = featureCollection(tronçonsArray);
@@ -186,6 +188,11 @@ export async function prepareData(): Promise<GlobalData> {
     routeList.map((route) => [route, routeStats(route)]),
   );
 
+  const phases: PhasesMap = {
+    [TronçonPhase.Une]: phaseStats(TronçonPhase.Une),
+    [TronçonPhase.Deux]: phaseStats(TronçonPhase.Deux),
+  }
+  
   function computeStats(
     segments: Feature<LineString, TronçonProperties>[],
   ): GlobalStats {
@@ -201,11 +208,8 @@ export async function prepareData(): Promise<GlobalData> {
       [TronçonStatus.Planned]: length(TronçonStatus.Planned),
       [TronçonStatus.Blocked]: length(TronçonStatus.Blocked),
       [TronçonStatus.Unknown]: length(TronçonStatus.Unknown),
-      [TronçonStatus.SecondPhase]: length(TronçonStatus.SecondPhase),
     };
-    const total =
-      _(segments).map("properties.length").sum() -
-      stats[TronçonStatus.SecondPhase];
+    const total =  _(segments).map("properties.length").sum();
 
     return { stats, total };
   }
@@ -223,6 +227,19 @@ export async function prepareData(): Promise<GlobalData> {
     return { code, stats, total, bounds: [xmin, ymin, xmax, ymax] };
   }
 
+  function phaseStats(phase: string): PhaseStats {
+    const t = _.filter(tronçonsArray, (feature) =>
+      feature.properties.phase == phase,
+    );
+  
+    const { stats, total } = computeStats(t);
+    const [xmin, ymin, xmax, ymax] = bbox({
+      type: "FeatureCollection",
+      features: t,
+    });
+    return { phase, stats, total, bounds: [xmin, ymin, xmax, ymax] };
+  }
+
   function departmentStats(): DepartementMap {
     const result: DepartementMap = {};
     featureEach(castedDepartements, (d) => {
@@ -237,6 +254,7 @@ export async function prepareData(): Promise<GlobalData> {
 
   return {
     globalStats: computeStats(tronçonsArray),
+    phases,
     routes,
     tronçons,
     globalBounds,

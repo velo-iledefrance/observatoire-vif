@@ -1,20 +1,26 @@
-import { GlobalStats } from "../types";
+import { GlobalStats, PhasesMap, Level } from "../types";
 import ProgressBar from "./progress_bar";
 import Legend from "./legend";
+import PhaseInfo from "./phase_info";
 
-export default function GlobalStatsComponent({
+export default function NetworkInfo({
   globalStats,
+  phases,
+  level,
+  setHash,
 }: {
   globalStats: GlobalStats;
+  phases: PhasesMap;
+  level: Level;
+  setHash: (hash: string) => void;
 }) {
   return (
-    <section className="section vif-global-stats">
-      <div className="vif-container">
-        <ProgressBar
-          stats={globalStats.stats}
-          total={globalStats.total}
-          global={true}
-        />
+    <section className="section vif-network-info">
+      <div className="vif-container" onClick={() => setHash("region")}>
+        <ProgressBar stats={globalStats.stats} total={globalStats.total} additionalClassName="progress-bar--main progress-bar--interactive" />
+        <div className="is-size-5 has-text-centered">
+          État d’avancement du réseau VIF
+        </div>
       </div>
       <div className="vif-container vif-container--narrow">
         <h1 className="title is-size-3 has-text-centered has-text-weight-bold">
@@ -34,12 +40,12 @@ export default function GlobalStatsComponent({
           <span>
             {" "}
             Le&nbsp;projet est porté par la Région{" "}
-            <span style={{ whiteSpace: "nowrap" }}>Île-de-France</span>. Une
-            première moitié doit être déployée d’ici 2025, l’autre d’ici 2030.
+            <span style={{ whiteSpace: "nowrap" }}>Île-de-France</span>.
             Cet observatoire rend compte de l’avancement du projet.
           </span>
         </p>
       </div>
+      <PhaseInfo phases={phases} level={level} setHash={setHash} />
     </section>
   );
 }

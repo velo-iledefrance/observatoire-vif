@@ -1,7 +1,7 @@
 import { statusColor, shortStatusLabel } from "@/utils/constants";
 import { LengthStats, TronçonStatus } from "../types";
 
-type Props = { stats: LengthStats; total: number; global: Boolean };
+type Props = { stats: LengthStats; total: number; additionalClassName: String };
 const Part = ({
   props,
   statuses,
@@ -42,7 +42,7 @@ function Pointer(statuses: TronçonStatus[], props: Props) {
     </div>
   ));
   return (
-    <div className="progress-bar__pointer progress-bar__pointer">
+    <div className="progress-bar__pointer">
       <div className="progress-bar__arrow progress-bar__arrow--gray"></div>
       <div className="progress-bar__bubble progress-bar__bubble--gray">
         {text}
@@ -67,41 +67,34 @@ export default function ProgressBar(props: Props) {
   ];
 
   return (
-    <>
-      <div className="progress-bar">
-        <div className="progress-bar__parts">
-          {parts.map((statuses) => (
-            <Part key={statuses.join()} props={props} statuses={statuses} />
-          ))}
-        </div>
-        <div className="progress-bar__parts-hover">
-          {parts.map((statuses) => (
-            <Part
-              key={statuses.join()}
-              props={props}
-              statuses={statuses}
-              pointer
-            />
-          ))}
-        </div>
-        <div className="progress-bar__pointer">
-          <div
-            className="progress-bar__arrow"
-            style={{ marginLeft: `${part_ok}%` }}
-          ></div>
-          <div
-            className="progress-bar__bubble progress-bar__bubble--black"
-            style={{ marginLeft: `${part_ok}%` }}
-          >
-            {Math.round(part_ok)}%
-          </div>
+    <div className={`progress-bar ${props.additionalClassName}`}>
+      <div className="progress-bar__parts">
+        {parts.map((statuses) => (
+          <Part key={statuses.join()} props={props} statuses={statuses} />
+        ))}
+      </div>
+      <div className="progress-bar__parts-hover">
+        {parts.map((statuses) => (
+          <Part
+            key={statuses.join()}
+            props={props}
+            statuses={statuses}
+            pointer
+          />
+        ))}
+      </div>
+      <div className="progress-bar__pointer">
+        <div
+          className="progress-bar__arrow"
+          style={{ marginLeft: `${part_ok}%` }}
+        ></div>
+        <div
+          className="progress-bar__bubble progress-bar__bubble--black"
+          style={{ marginLeft: `${part_ok}%` }}
+        >
+          {Math.round(part_ok)}%
         </div>
       </div>
-      {props.global && (
-        <div className="title is-size-5 has-text-centered">
-          État d’avancement de la phase&nbsp;1 du réseau VIF (2025)
-        </div>
-      )}
-    </>
+    </div>
   );
 }

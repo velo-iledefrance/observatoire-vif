@@ -43,7 +43,7 @@ export default async function RootLayout() {
         />
         <meta
           name="description"
-          content="Le réseau vélo Île-de-France (réseau VIF) comprend 750 km de voies cyclables directes, continues et sécurisées pour connecter les grands pôles de la région. Le projet est porté par la Région Île-de-France. Une première moitié doit être déployée d’ici 2025, l’autre d’ici 2030. Cet observatoire rend compte de l’avancement du projet.
+          content="Le réseau vélo Île-de-France (réseau VIF) comprend 750 km de voies cyclables directes, continues et sécurisées pour connecter les grands pôles de la région. Le projet est porté par la Région Île-de-France. Cet observatoire rend compte de l’avancement du projet.
         "
         />
 
@@ -58,10 +58,10 @@ export default async function RootLayout() {
         />
         <meta
           property="og:description"
-          content="Le réseau vélo Île-de-France (réseau VIF) comprend 750 km de voies cyclables directes, continues et sécurisées pour connecter les grands pôles de la région. Le projet est porté par la Région Île-de-France. Une première moitié doit être déployée d’ici 2025, l’autre d’ici 2030. Cet observatoire rend compte de l’avancement du projet.
+          content="Le réseau vélo Île-de-France (réseau VIF) comprend 750 km de voies cyclables directes, continues et sécurisées pour connecter les grands pôles de la région. Le projet est porté par la Région Île-de-France. Cet observatoire rend compte de l’avancement du projet.
         "
         />
-        <meta property="og:image" content="/preview.jpg" />
+        <meta property="og:image" content="/preview.webp" />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta
@@ -74,10 +74,10 @@ export default async function RootLayout() {
         />
         <meta
           property="twitter:description"
-          content="Le réseau vélo Île-de-France (réseau VIF) comprend 750 km de voies cyclables directes, continues et sécurisées pour connecter les grands pôles de la région. Le projet est porté par la Région Île-de-France. Une première moitié doit être déployée d’ici 2025, l’autre d’ici 2030. Cet observatoire rend compte de l’avancement du projet.
+          content="Le réseau vélo Île-de-France (réseau VIF) comprend 750 km de voies cyclables directes, continues et sécurisées pour connecter les grands pôles de la région. Le projet est porté par la Région Île-de-France. Cet observatoire rend compte de l’avancement du projet.
         "
         />
-        <meta property="twitter:image" content="/preview.jpg" />
+        <meta property="twitter:image" content="/preview.webp" />
       </head>
       <body className={inter.className}>
         <main className="vif-main">

@@ -58,7 +58,7 @@ export default function RouteDetails({
           </label>
         </div>
         <div className="vif--block">
-          <ProgressBar stats={route.stats} total={route.total} global={false} />
+          <ProgressBar stats={route.stats} total={route.total} additionalClassName="" />
         </div>
         <div className="vif--block vif-container vif-container--narrow vif-border-top">
           <Legend stats={route.stats} total={route.total} />

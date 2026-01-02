@@ -26,14 +26,19 @@ export enum TronçonStatus {
   Building = "Building",
   Built = "Built",
   Blocked = "Blocked",
-  SecondPhase = "SecondPhase",
   Unknown = "Unknown",
+}
+
+export enum TronçonPhase {
+  Une = "1",
+  Deux = "2",
 }
 
 export type TronçonProperties = {
   id: string;
   length: number;
   status: TronçonStatus;
+  phase: TronçonPhase;
   route: string[];
   variant: boolean;
   commune?: string;
@@ -63,8 +68,16 @@ export type RouteStats = {
   total: number;
   bounds: Bounds;
 };
-
 export type RoutesMap = { [index: string]: RouteStats };
+
+export type PhaseStats = {
+  phase: string;
+  stats: LengthStats;
+  total: number;
+  bounds: Bounds;
+};
+export type PhasesMap = { [index: string]: PhaseStats };
+
 export type DepartementMap = { [index: string]: GlobalStats };
 
 export type GlobalStats = {
@@ -74,12 +87,14 @@ export type GlobalStats = {
 
 export type Level =
   | { level: "region" }
+  | { level: "phase"; props: PhaseStats }
   | { level: "route"; props: RouteStats }
   | { level: "segment"; props: TronçonProperties };
 
 export type GlobalData = {
   tronçons: FeatureCollection<LineString, TronçonProperties>;
   globalBounds: [number, number, number, number];
+  phases: PhasesMap;
   routes: RoutesMap;
   globalStats: GlobalStats;
   departementStats: DepartementMap;

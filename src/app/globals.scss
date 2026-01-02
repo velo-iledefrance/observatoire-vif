@@ -52,7 +52,7 @@ $desktop: 960px;
     border-left: solid 1px #d8d7d3;
   }
 
-  .vif-global-stats {
+  .vif-network-info {
     >* {
       padding-top: 18px;
     }
@@ -216,10 +216,14 @@ $desktop: 960px;
 }
 
 // Component: global-stats
-.vif-global-stats {
+.vif-network-info {
   display: flex;
   flex-flow: column;
 
+  .vif-container {
+    gap: 60px;
+  }
+  
   >* {
     width: 100%;
   }
@@ -328,18 +332,22 @@ $desktop: 960px;
 
 // Component: Progress Bar
 .progress-bar {
-  height: 26px;
-  border-radius: 29px;
-  border: solid 6px #eaeae5;
+  --progress-bar-height: 26px;
+  --progress-bar-outline-width: 6px;
+  height: var(--progress-bar-height);
+  border-radius: calc(var(--progress-bar-height) - var(--progress-bar-outline-width) / 2);
+  border: solid 1px #eaeae5;
+  outline: solid var(--progress-bar-outline-width) #eaeae5;
   box-sizing: content-box;
   position: relative;
-  margin-block-end: 62px;
+  margin: var(--progress-bar-outline-width);
+  margin-block-end: 68px;
 }
 
 .progress-bar__parts {
   display: flex;
   flex-direction: row;
-  height: 26px;
+  height: var(--progress-bar-height);
   clip-path: inset(0% 0% round 29px);
 }
 
@@ -355,11 +363,9 @@ $desktop: 960px;
 }
 
 @media screen and (max-width: $desktop) {
-
   // Tweak the main progress bar border on mobile
-  .vif-global-stats .progress-bar {
-    border-color: #f1ede2;
-    outline: solid 1px #ddd;
+  .progress-bar--main {
+    box-shadow: 0 0 0 calc(var(--progress-bar-outline-width) + 1px) #ddd;
   }
 }
 
@@ -384,6 +390,7 @@ $desktop: 960px;
 
 .progress-bar__pointer {
   margin-block-start: 14px;
+  z-index: 1;
 }
 
 .progress-bar__arrow {
@@ -422,13 +429,69 @@ $desktop: 960px;
   font-size: 1rem;
 }
 
+.progress-bar.progress-bar--interactive {
+  &:hover {
+    border: solid 1px #c3cbcc;
+    cursor: pointer;
+  }
+  &:active {
+    border: solid 1px RGB(0, 130, 173);
+  }
+}
+
+[aria-pressed="true"] .progress-bar.progress-bar--interactive {
+  border: solid 1px #7c8c8f;
+}
+
+.progress-bar.progress-bar--small {
+  --progress-bar-height: 15px;
+  --progress-bar-outline-width: 4px;
+  margin-block-end: 40px;
+  
+  .progress-bar__pointer {
+    margin-block-start: 10px;
+  }
+  .progress-bar__arrow {
+    width: 13px;
+    height: 6px;
+  }
+  .progress-bar__bubble {
+    width: max-content;
+    padding-inline: 10px;
+    border-radius: 14px;
+  }
+  .progress-bar__bubble--black {
+    line-height: 20px;
+    font-size: 1rem;
+  }
+  .progress-bar__bubble--gray {
+    padding-block: 4px;
+    font-size: .9rem;
+  }
+}
+
+// VIF Phases 
+.vif-phases-stats {
+  display: flex;
+  gap: 1em;
+}
+
+.vif-phase {
+  display: block;
+  width: 100%;
+}
+
+.vif-phase:has(~ [aria-pressed="true"]), [aria-pressed="true"]~.vif-phase{
+  opacity: 80%
+}
+
 // Maplibre overrides
 .maplibregl-control-container .maplibregl-ctrl-bottom-right {
   bottom: 25px;
 }
 
 // Component: Legend
-.legend__group+.legend__group {
+.legend__group+.legend__group { // useless now?
   margin-block-start: 12px;
 }
 
