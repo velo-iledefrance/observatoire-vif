@@ -1,1 +1,2 @@
-export default () => {};
+const Page = () => {};
+export default Page;

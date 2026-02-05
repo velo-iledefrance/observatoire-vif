@@ -35,6 +35,11 @@ export default async function RootLayout() {
           rel="apple-touch-icon"
           href="/cropped-favicon_cvidf_rvb-180x180.png"
         />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://compteurs.enliberte.fr/hit/i9wdpg585ozy2rq"
+        />
 
         <title>Observatoire du Réseau Vélo Île-de-France</title>
         <meta

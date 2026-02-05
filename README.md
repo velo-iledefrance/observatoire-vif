@@ -6,7 +6,7 @@ Les données affichées sont mises à la disposition du public par la région Î
 
 ## Environnement technique
 
-L’observatoire est un site statique, réalisé avec [next.js](https://nextjs.org/). [Node](https://nodejs.org/en/download/package-manager) et [`yarn`](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) sont requis.
+L’observatoire est un site statique, réalisé avec [next.js](https://nextjs.org/). [Node](https://nodejs.org/en/download/package-manager) et [`bun`](https://bun.com/docs/installation) sont requis.
 
 - Outre la génération du html, le projet récupère les données depuis cocarto et prépare le contenu à afficher pour chaque segment. Notamment, les données des communes sont rajoutées à partir de `./data/communes-ile-de-france.geo.json`.
 - La carte est réalisée avec maplibre, et utilise un fond de carte préparé sur maptiler.com et dont les données sont fournies par [Tuiles en Liberté](https://tuiles.enliberte.fr).
@@ -22,19 +22,19 @@ COCARTO_TOKEN= # token de partage de la carte sur cocarto
 Installer les dépendances:
 
 ```
-yarn install
+make install
 ```
 
 Démarrer un serveur local:
 
 ```
-yarn dev
+make run
 ```
 
 ### Publication
 
 ```
-yarn build
+make build
 ```
 
 génère un site statique dans le dossier `./out`.

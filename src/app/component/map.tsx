@@ -82,7 +82,6 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
   const map = useRef<null | maplibregl.Map>(null);
   const [mapReady, setMapReady] = useState(false);
   const [mapViewport, setMapViewport] = useState<null | LngLatBounds>(null);
-  let hoveredSegment: null | string | number = null;
 
   let protocol = new Protocol();
   maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -95,7 +94,9 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
       container: mapContainer.current || "",
       bounds: new LngLatBounds(bounds),
       style: `style.json`,
-    })
+    });
+    let hoveredSegment: null | string | number = null;
+
     newMap.on("load", () => {
         newMap
           .addSource("vif", {
@@ -207,6 +208,7 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
 
           newMap.moveLayer("Town labels");
           newMap.moveLayer("City labels");
+          newMap.moveLayer("Road labels");
         })
       newMap.on("moveend", () => { setMapViewport(newMap.getBounds()) })
       newMap.on("click", () => setHash("region") )
@@ -278,9 +280,9 @@ export default function Map({ bounds, segments, level, setHash }: Props) {
 
   return (
     <div ref={mapContainer} className="vif-map">
-      <figure className="vif-map--logo">
+      <picture className="vif-map--logo">
         <img src="logo_cvidf.png" alt="Logo du collectif vélo Île-de-France" />
-      </figure>
+      </picture>
     </div>
   );
 }

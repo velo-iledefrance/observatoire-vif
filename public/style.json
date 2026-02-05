@@ -2705,7 +2705,12 @@
             12
           ]
         ],
-        "text-field": "{name:latin}",
+        "text-field": [
+          "case",
+          ["to-boolean", ["get", "ref"]],
+          ["concat", ["get", "name:latin"], " (", ["get", "ref"], ")"],
+          ["get", "name:latin"]
+        ],
         "visibility": "visible",
         "text-justify": "center",
         "symbol-spacing": {

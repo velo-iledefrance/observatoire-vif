@@ -38,15 +38,34 @@ export default function StateHolder ({ data }: { data: GlobalData }) {
     console.log(`Longueur totale considérée : ${stat.total} mètres`);
     console.log(stat.stats);
   });
+
   const [bounds, setBounds] = useState(data.globalBounds);
   const [hash, setHash] = useState("");
+  const [prevHash, setPrevHash] = useState("");
   const [level, setLevel] = useState<Level>({ level: "region" });
 
+  // After the initial load, explicitely trigger a re-render if the location hash is present.
+  //
+  // The proper solution for this would be to initialize the hash state with `window ? window.location.hash : ""`.
+  // But then Next.js complains that the server-side-rendered content (which doesn't have access to the URL hash)
+  // differs from the hydrated client content (which can access the URL hash).
+  //
+  // This is technically true: because the URL hash is never sent to the server, the server can't generate the
+  // proper map for the given hash (the global zoomed-out map will always be returned by the server).
+  // However in our case this is the desired behavior: we want the full map to be displayed first, and then
+  // zoom on the location specified by the URL hash.
+  //
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setHash(window.location.hash), []);
 
+  // When the hash changes, update the external APIs.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     window.location.hash = hash;
+  }, [hash]);
+
+  if (hash !== prevHash) {
+    setPrevHash(hash);
     const [level, id] = hash.replace("#", "").split("/");
 
     if (level === "" || level === "region") {
@@ -72,7 +91,7 @@ export default function StateHolder ({ data }: { data: GlobalData }) {
         console.warn("something weird", tronçon);
       }
     }
-  }, [hash]);
+  };
 
   return (
     <>

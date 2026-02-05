@@ -5,10 +5,8 @@
 name: Télécharger les données sur cocarto.com et déployer
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes to any branch
   push:
-    branches: ["main"]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -25,34 +23,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
+  # Build job (all branches)
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -62,23 +44,26 @@ jobs:
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: make install
+      - name: Lint
+        run: make lint
       - name: Build with Next.js
         env:
           COCARTO_TOKEN: ${{ secrets.COCARTO_TOKEN }}
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: make build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
-  # Deployment job
+  # Deployment job (only on the `main` branch)
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
